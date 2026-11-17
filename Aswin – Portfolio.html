@@ -125,6 +125,32 @@ section{position:relative;scroll-margin-top:24px}
 @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.pill i{animation:none}.card,.photo{will-change:auto}}
 .links a.email-link{font-family:Barlow,system-ui,sans-serif;font-weight:600;letter-spacing:.035em;color:#fff}.links a.email-link:hover{color:var(--red)}
 .contact-form button:disabled{opacity:.65;cursor:wait}.form-status{min-height:1.4em;margin:0;color:var(--mute);font-size:.9rem}
+
+/* Compact, balanced mobile header and hero */
+.top{min-height:78px;padding:15px 0;line-height:1.3}
+.top>div{font-size:.88rem;line-height:1.3;letter-spacing:.02em}
+.top b{font-size:.8rem;letter-spacing:.12em;text-transform:uppercase}
+.nav a{font-size:.82rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase}
+@media(max-width:640px){
+ .top{min-height:68px;padding:12px 0;gap:10px;flex-wrap:nowrap}
+ .top>div{font-size:.74rem;line-height:1.25;white-space:nowrap}
+ .top b{font-size:.68rem;letter-spacing:.11em;margin-bottom:2px}
+ .nav{gap:clamp(8px,2vw,14px)}
+ .nav a{font-size:.68rem;letter-spacing:.035em}
+ .hero{min-height:0;padding-bottom:8px}
+ .hero .wrap{row-gap:10px;padding-top:0}
+ .big{top:0;left:-3%;font-size:clamp(3rem,13vw,4.8rem);line-height:.88;opacity:.28}
+ .who{padding-top:clamp(88px,20vw,118px)}
+ .script{font-size:clamp(1.9rem,8vw,2.45rem);margin-bottom:0}
+ .who h1{font-size:clamp(4rem,15vw,5rem);margin-bottom:10px}
+ .role{font-size:clamp(1.15rem,5.5vw,1.45rem)}
+ .who p:not(.script){max-width:42ch;font-size:.98rem}
+ .pill{font-size:.82rem;flex-wrap:wrap}
+ .photo{width:min(90%,360px)}
+ .side{padding:16px 0 26px}
+}
+@media(max-width:400px){.top>div{font-size:.68rem}.nav a{font-size:.63rem}.hero .wrap{padding-inline:18px}}
+
 </style></head>
 <body>
 <header class="wrap top"><div><b>Developer</b>AI &amp; Cloud Enthusiast</div><nav class="nav" aria-label="Main navigation"><a href="#build">Work</a><a href="#skills">Skills</a><a href="#contact">Contact</a></nav></header>
