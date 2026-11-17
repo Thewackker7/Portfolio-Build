@@ -124,6 +124,7 @@ section{position:relative;scroll-margin-top:24px}
 @media(max-width:640px){.big{transform:translateZ(-40px) scale(1.04)}.who,.side{transform:none}.photo{transform:none!important}.card{transform:none!important}}
 @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.pill i{animation:none}.card,.photo{will-change:auto}}
 .links a.email-link{font-family:Barlow,system-ui,sans-serif;font-weight:600;letter-spacing:.035em;color:#fff}.links a.email-link:hover{color:var(--red)}
+.contact-form button:disabled{opacity:.65;cursor:wait}.form-status{min-height:1.4em;margin:0;color:var(--mute);font-size:.9rem}
 </style></head>
 <body>
 <header class="wrap top"><div><b>Developer</b>AI &amp; Cloud Enthusiast</div><nav class="nav" aria-label="Main navigation"><a href="#build">Work</a><a href="#skills">Skills</a><a href="#contact">Contact</a></nav></header>
@@ -188,17 +189,52 @@ $ nmap -sV target
 <section id="contact"><div class="wrap">
  <div class="contact-grid">
   <div><h2>Let’s work<br>together</h2><p>I’m open to projects, internships and collaborations. Send me a message and let’s build something useful.</p><div class="links"><a class="email-link" href="mailto:aswinks6238@gmail.com"><span>MAIL</span>aswinks6238@gmail.com</a><a href="https://github.com/Thewackker7" target="_blank" rel="noopener noreferrer"><span>GIT</span>GitHub.com</a><a href="https://www.linkedin.com/in/aswin-k-s-774870338" target="_blank" rel="noopener noreferrer"><span>IN</span>LinkedIn.com</a></div></div>
-  <form class="contact-form" id="contact-form">
+  <form class="contact-form" id="contact-form" action="https://formsubmit.co/aswinks6238@gmail.com" method="POST">
+   <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
    <label for="name">Your name<input id="name" name="name" autocomplete="name" required></label>
    <label for="email">Your email<input id="email" name="email" type="email" autocomplete="email" required></label>
    <label for="message">Message<textarea id="message" name="message" required></textarea></label>
    <button type="submit">Send message ↗</button>
-   <p class="form-note">This opens your email app with your message ready to send.</p>
+   <p class="form-note">Your message will be sent securely to my inbox.</p>
+   <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
   </form>
  </div>
 </div></section>
 <footer>© 2026 Aswin. All rights reserved.</footer>
-<script>document.getElementById("contact-form").addEventListener("submit", function (event) { event.preventDefault(); const data = new FormData(this); const subject = encodeURIComponent("Portfolio message from " + data.get("name")); const body = encodeURIComponent(data.get("message") + "\n\nFrom: " + data.get("name") + " (" + data.get("email") + ")"); window.location.href = "mailto:aswinks6238@gmail.com?subject=" + subject + "&body=" + body; });</script>
+<script>
+const contactForm = document.getElementById('contact-form');
+if (contactForm) {
+  contactForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const status = document.getElementById('form-status');
+    const button = contactForm.querySelector('button[type="submit"]');
+    const values = new FormData(contactForm);
+    const senderName = values.get('name');
+    status.textContent = 'Sending your message…';
+    button.disabled = true;
+    try {
+      const response = await fetch('https://formsubmit.co/ajax/aswinks6238@gmail.com', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          name: senderName,
+          email: values.get('email'),
+          message: values.get('message'),
+          _subject: `Portfolio message from ${senderName}`
+        })
+      });
+      const result = await response.json();
+      if (!response.ok || result.success === false) throw new Error('Submission failed');
+      contactForm.reset();
+      status.textContent = 'Thanks! Your message has been sent.';
+    } catch (error) {
+      status.textContent = 'Sorry, your message could not be sent. Please email aswinks6238@gmail.com instead.';
+    } finally {
+      button.disabled = false;
+    }
+  });
+}
+</script>
 <script>
 (() => {
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
